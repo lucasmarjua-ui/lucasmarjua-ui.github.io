@@ -3,13 +3,22 @@ import { useScroll, useTransform, motion } from 'framer-motion';
 import LiveProjectButton from '../components/LiveProjectButton';
 import PlaceholderImage from '../components/PlaceholderImage';
 
+import onedayStart from '../assets/screenshots/oneday-start.webp';
+import onedayDayLoop from '../assets/screenshots/oneday-day-loop.webp';
+import onedaySummary from '../assets/screenshots/oneday-summary.webp';
+import retrogamesCabinetSelect from '../assets/screenshots/retrogames-cabinet-select.webp';
+import retrogamesLeaderboard from '../assets/screenshots/retrogames-leaderboard.webp';
+import retrogamesGameplay from '../assets/screenshots/retrogames-gameplay.webp';
+
+type ProjectImage = { src: string; alt: string } | { label: string };
+
 interface Project {
   number: string;
   category: string;
   name: string;
   buttonLabel: string;
   href: string;
-  images: [string, string, string];
+  images: [ProjectImage, ProjectImage, ProjectImage];
 }
 
 const PROJECTS: Project[] = [
@@ -19,7 +28,11 @@ const PROJECTS: Project[] = [
     name: 'OneDay',
     buttonLabel: 'Live Project',
     href: 'https://lucasmarjua-ui.github.io/oneday/',
-    images: ['OneDay — start screen', 'OneDay — day loop (NPC)', 'OneDay — day summary'],
+    images: [
+      { src: onedayStart, alt: 'OneDay era-selection start screen' },
+      { src: onedayDayLoop, alt: 'OneDay day loop — encounter with the recurring NPC Kleon' },
+      { src: onedaySummary, alt: 'OneDay end-of-day summary screen with stats and daily objectives' },
+    ],
   },
   {
     number: '02',
@@ -27,7 +40,11 @@ const PROJECTS: Project[] = [
     name: 'PawMatch',
     buttonLabel: 'View Code',
     href: 'https://github.com/lucasmarjua-ui/pawmatch',
-    images: ['PawMatch — match feed', 'PawMatch — dog profile', 'PawMatch — chat'],
+    images: [
+      { label: 'PawMatch — match feed' },
+      { label: 'PawMatch — dog profile' },
+      { label: 'PawMatch — chat' },
+    ],
   },
   {
     number: '03',
@@ -35,9 +52,20 @@ const PROJECTS: Project[] = [
     name: 'RetroGames',
     buttonLabel: 'Live Project',
     href: 'https://lucasmarjua-ui.github.io/retrogames/',
-    images: ['RetroGames — cabinet select', 'RetroGames — hall of fame', 'RetroGames — gameplay'],
+    images: [
+      { src: retrogamesCabinetSelect, alt: 'RetroGames cabinet-selection screen' },
+      { src: retrogamesLeaderboard, alt: 'RetroGames Hall of Fame leaderboard' },
+      { src: retrogamesGameplay, alt: 'RetroGames Snake gameplay in progress' },
+    ],
   },
 ];
+
+function ProjectImageTile({ image, className, style }: { image: ProjectImage; className: string; style?: CSSProperties }) {
+  if ('src' in image) {
+    return <img src={image.src} alt={image.alt} className={`${className} block w-full object-cover`} style={style} loading="lazy" />;
+  }
+  return <PlaceholderImage label={image.label} className={className} style={style} />;
+}
 
 function ProjectCard({ project, index, total }: { project: Project; index: number; total: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -81,19 +109,19 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
 
         <div className="mt-6 grid grid-cols-[40%_60%] gap-3 sm:mt-8">
           <div className="flex flex-col gap-3">
-            <PlaceholderImage
-              label={project.images[0]}
+            <ProjectImageTile
+              image={project.images[0]}
               className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
               style={{ height: 'clamp(130px, 16vw, 230px)' }}
             />
-            <PlaceholderImage
-              label={project.images[1]}
+            <ProjectImageTile
+              image={project.images[1]}
               className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
               style={{ height: 'clamp(160px, 22vw, 340px)' }}
             />
           </div>
-          <PlaceholderImage
-            label={project.images[2]}
+          <ProjectImageTile
+            image={project.images[2]}
             className="h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
           />
         </div>

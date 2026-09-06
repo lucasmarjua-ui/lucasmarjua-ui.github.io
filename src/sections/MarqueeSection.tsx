@@ -1,22 +1,39 @@
 import { useEffect, useRef } from 'react';
 import PlaceholderImage from '../components/PlaceholderImage';
 
-const PROJECT_SHOTS = [
-  'OneDay — start screen',
-  'PawMatch — match feed',
-  'RetroGames — cabinet select',
-  'MasterCinema — trivia round',
-  'Antonio Valencia Estilistas — booking',
-  'Trivia (Unity) — gameplay',
-  'OneDay — day loop',
-  'PawMatch — profile',
-  'RetroGames — leaderboard',
-  'MasterCinema — results',
+import onedayStart from '../assets/screenshots/oneday-start.webp';
+import onedayDayLoop from '../assets/screenshots/oneday-day-loop.webp';
+import retrogamesCabinetSelect from '../assets/screenshots/retrogames-cabinet-select.webp';
+import retrogamesLeaderboard from '../assets/screenshots/retrogames-leaderboard.webp';
+import mastercinemaTrivia from '../assets/screenshots/mastercinema-trivia.webp';
+import mastercinemaResults from '../assets/screenshots/mastercinema-results.webp';
+
+type Shot = { src: string; alt: string } | { label: string };
+
+const PROJECT_SHOTS: Shot[] = [
+  { src: onedayStart, alt: 'OneDay era-selection start screen' },
+  { label: 'PawMatch — match feed' },
+  { src: retrogamesCabinetSelect, alt: 'RetroGames cabinet-selection screen' },
+  { src: mastercinemaTrivia, alt: 'MasterCinema trivia round' },
+  { label: 'Antonio Valencia Estilistas — booking' },
+  { label: 'Trivia (Unity) — gameplay' },
+  { src: onedayDayLoop, alt: 'OneDay day loop with the recurring NPC Kleon' },
+  { label: 'PawMatch — profile' },
+  { src: retrogamesLeaderboard, alt: 'RetroGames Hall of Fame leaderboard' },
+  { src: mastercinemaResults, alt: 'MasterCinema trivia results screen' },
 ];
 
 const half = Math.ceil(PROJECT_SHOTS.length / 2);
 const row1 = Array(3).fill(PROJECT_SHOTS.slice(0, half)).flat();
 const row2 = Array(3).fill(PROJECT_SHOTS.slice(half)).flat();
+
+function MarqueeTile({ shot }: { shot: Shot }) {
+  const className = 'h-[270px] w-[420px] shrink-0 rounded-2xl';
+  if ('src' in shot) {
+    return <img src={shot.src} alt={shot.alt} className={`${className} block object-cover`} loading="lazy" />;
+  }
+  return <PlaceholderImage label={shot.label} className={className} />;
+}
 
 export default function MarqueeSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -48,21 +65,13 @@ export default function MarqueeSection() {
     <section ref={sectionRef} className="overflow-hidden bg-[#0C0C0C] pb-10 pt-24 sm:pt-32 md:pt-40">
       <div className="flex flex-col gap-3">
         <div ref={row1Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
-          {row1.map((label, i) => (
-            <PlaceholderImage
-              key={`row1-${i}`}
-              label={label}
-              className="h-[270px] w-[420px] shrink-0 rounded-2xl"
-            />
+          {row1.map((shot, i) => (
+            <MarqueeTile key={`row1-${i}`} shot={shot} />
           ))}
         </div>
         <div ref={row2Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
-          {row2.map((label, i) => (
-            <PlaceholderImage
-              key={`row2-${i}`}
-              label={label}
-              className="h-[270px] w-[420px] shrink-0 rounded-2xl"
-            />
+          {row2.map((shot, i) => (
+            <MarqueeTile key={`row2-${i}`} shot={shot} />
           ))}
         </div>
       </div>
