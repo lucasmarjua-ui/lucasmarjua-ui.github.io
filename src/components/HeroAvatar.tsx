@@ -1,10 +1,7 @@
-import avatarImage from '../assets/lucas-avatar.png';
+import avatarImage from '../assets/lucas-avatar.webp';
 
 /**
- * Hero portrait — a stylized duotone treatment of a real photo, recolored into
- * the site's own gradient palette (#646973 → #BBCCD7) and cut out so it floats
- * on the dark background, matching the composition of the abstract version it
- * replaces. Not a raw photo: it's color-treated and background-removed.
+ * Hero portrait — a 3D clay-render style illustration, not a photo.
  */
 export default function HeroAvatar({ className = '' }: { className?: string }) {
   return (
