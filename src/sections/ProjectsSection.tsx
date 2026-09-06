@@ -6,11 +6,17 @@ import PlaceholderImage from '../components/PlaceholderImage';
 import onedayStart from '../assets/screenshots/oneday-start.webp';
 import onedayDayLoop from '../assets/screenshots/oneday-day-loop.webp';
 import onedaySummary from '../assets/screenshots/oneday-summary.webp';
-import retrogamesCabinetSelect from '../assets/screenshots/retrogames-cabinet-select.webp';
-import retrogamesLeaderboard from '../assets/screenshots/retrogames-leaderboard.webp';
-import retrogamesGameplay from '../assets/screenshots/retrogames-gameplay.webp';
+import pawmatchDiscover from '../assets/screenshots/pawmatch-discover.webp';
+import pawmatchOnboarding from '../assets/screenshots/pawmatch-onboarding.webp';
+import pawmatchMatches from '../assets/screenshots/pawmatch-matches.webp';
+import retrogamesPortal from '../assets/screenshots/retrogames-portal.webp';
+import retrogamesPersonaje from '../assets/screenshots/retrogames-personaje.webp';
+import retrogamesTienda from '../assets/screenshots/retrogames-tienda.webp';
+import mastercinemaVestibulo from '../assets/screenshots/mastercinema-vestibulo.webp';
+import mastercinemaMaraton from '../assets/screenshots/mastercinema-maraton.webp';
+import mastercinemaResumen from '../assets/screenshots/mastercinema-resumen.webp';
 
-type ProjectImage = { src: string; alt: string } | { label: string };
+type ProjectImage = { src: string; alt: string; position?: string } | { label: string };
 
 interface Project {
   number: string;
@@ -41,9 +47,9 @@ const PROJECTS: Project[] = [
     buttonLabel: 'View Code',
     href: 'https://github.com/lucasmarjua-ui/pawmatch',
     images: [
-      { label: 'PawMatch — match feed' },
-      { label: 'PawMatch — dog profile' },
-      { label: 'PawMatch — chat' },
+      { src: pawmatchOnboarding, alt: 'PawMatch onboarding screen', position: 'top' },
+      { src: pawmatchMatches, alt: 'PawMatch matches and messages list', position: 'top' },
+      { src: pawmatchDiscover, alt: 'PawMatch discover feed with a dog profile card' },
     ],
   },
   {
@@ -53,16 +59,36 @@ const PROJECTS: Project[] = [
     buttonLabel: 'Live Project',
     href: 'https://lucasmarjua-ui.github.io/retrogames/',
     images: [
-      { src: retrogamesCabinetSelect, alt: 'RetroGames cabinet-selection screen' },
-      { src: retrogamesLeaderboard, alt: 'RetroGames Hall of Fame leaderboard' },
-      { src: retrogamesGameplay, alt: 'RetroGames Snake gameplay in progress' },
+      { src: retrogamesPersonaje, alt: 'RetroGames character customization screen' },
+      { src: retrogamesTienda, alt: 'RetroGames cabinet skins shop', position: 'top' },
+      { src: retrogamesPortal, alt: 'RetroGames arcade landing screen with game selection' },
+    ],
+  },
+  {
+    number: '04',
+    category: 'Trivia Game',
+    name: 'MasterCinema',
+    buttonLabel: 'Live Project',
+    href: 'https://lucasmarjua-ui.github.io/mastercinema/',
+    images: [
+      { src: mastercinemaResumen, alt: 'MasterCinema marathon results screen with score' },
+      { src: mastercinemaMaraton, alt: 'MasterCinema trivia question in Marathon mode' },
+      { src: mastercinemaVestibulo, alt: 'MasterCinema landing screen with category selection', position: 'top' },
     ],
   },
 ];
 
 function ProjectImageTile({ image, className, style }: { image: ProjectImage; className: string; style?: CSSProperties }) {
   if ('src' in image) {
-    return <img src={image.src} alt={image.alt} className={`${className} block w-full object-cover`} style={style} loading="lazy" />;
+    return (
+      <img
+        src={image.src}
+        alt={image.alt}
+        className={`${className} block w-full object-cover`}
+        style={{ objectPosition: image.position ?? 'center', ...style }}
+        loading="lazy"
+      />
+    );
   }
   return <PlaceholderImage label={image.label} className={className} style={style} />;
 }

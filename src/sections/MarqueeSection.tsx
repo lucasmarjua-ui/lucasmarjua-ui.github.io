@@ -3,24 +3,26 @@ import PlaceholderImage from '../components/PlaceholderImage';
 
 import onedayStart from '../assets/screenshots/oneday-start.webp';
 import onedayDayLoop from '../assets/screenshots/oneday-day-loop.webp';
-import retrogamesCabinetSelect from '../assets/screenshots/retrogames-cabinet-select.webp';
-import retrogamesLeaderboard from '../assets/screenshots/retrogames-leaderboard.webp';
-import mastercinemaTrivia from '../assets/screenshots/mastercinema-trivia.webp';
-import mastercinemaResults from '../assets/screenshots/mastercinema-results.webp';
+import pawmatchChat from '../assets/screenshots/pawmatch-chat.webp';
+import pawmatchProfile from '../assets/screenshots/pawmatch-profile.webp';
+import retrogamesPortal from '../assets/screenshots/retrogames-portal.webp';
+import retrogamesTienda from '../assets/screenshots/retrogames-tienda.webp';
+import mastercinemaVestibulo from '../assets/screenshots/mastercinema-vestibulo.webp';
+import mastercinemaMaraton from '../assets/screenshots/mastercinema-maraton.webp';
 
-type Shot = { src: string; alt: string } | { label: string };
+type Shot = { src: string; alt: string; position?: string } | { label: string };
 
 const PROJECT_SHOTS: Shot[] = [
   { src: onedayStart, alt: 'OneDay era-selection start screen' },
-  { label: 'PawMatch — match feed' },
-  { src: retrogamesCabinetSelect, alt: 'RetroGames cabinet-selection screen' },
-  { src: mastercinemaTrivia, alt: 'MasterCinema trivia round' },
+  { src: pawmatchChat, alt: 'PawMatch conversation with a match', position: 'top' },
+  { src: retrogamesPortal, alt: 'RetroGames arcade landing screen' },
+  { src: mastercinemaVestibulo, alt: 'MasterCinema landing screen', position: 'top' },
   { label: 'Antonio Valencia Estilistas — booking' },
   { label: 'Trivia (Unity) — gameplay' },
   { src: onedayDayLoop, alt: 'OneDay day loop with the recurring NPC Kleon' },
-  { label: 'PawMatch — profile' },
-  { src: retrogamesLeaderboard, alt: 'RetroGames Hall of Fame leaderboard' },
-  { src: mastercinemaResults, alt: 'MasterCinema trivia results screen' },
+  { src: pawmatchProfile, alt: 'PawMatch dog profile screen', position: 'top' },
+  { src: retrogamesTienda, alt: 'RetroGames cabinet skins shop', position: 'top' },
+  { src: mastercinemaMaraton, alt: 'MasterCinema trivia question in Marathon mode' },
 ];
 
 const half = Math.ceil(PROJECT_SHOTS.length / 2);
@@ -30,7 +32,15 @@ const row2 = Array(3).fill(PROJECT_SHOTS.slice(half)).flat();
 function MarqueeTile({ shot }: { shot: Shot }) {
   const className = 'h-[270px] w-[420px] shrink-0 rounded-2xl';
   if ('src' in shot) {
-    return <img src={shot.src} alt={shot.alt} className={`${className} block object-cover`} loading="lazy" />;
+    return (
+      <img
+        src={shot.src}
+        alt={shot.alt}
+        className={`${className} block object-cover`}
+        style={{ objectPosition: shot.position ?? 'center' }}
+        loading="lazy"
+      />
+    );
   }
   return <PlaceholderImage label={shot.label} className={className} />;
 }
