@@ -133,8 +133,11 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
           <LiveProjectButton href={project.href} label={project.buttonLabel} />
         </div>
 
-        <div className="mt-6 grid grid-cols-[40%_60%] gap-3 sm:mt-8">
-          <div className="flex flex-col gap-3">
+        <div
+          className="mt-6 grid grid-cols-[40%_60%] gap-3 sm:mt-8"
+          style={{ height: 'clamp(302px, calc(38vw + 12px), 582px)', gridTemplateRows: '1fr' }}
+        >
+          <div className="flex min-h-0 flex-col gap-3">
             <ProjectImageTile
               image={project.images[0]}
               className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
@@ -148,7 +151,7 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
           </div>
           <ProjectImageTile
             image={project.images[2]}
-            className="h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
+            className="h-full min-h-0 rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
           />
         </div>
       </motion.div>

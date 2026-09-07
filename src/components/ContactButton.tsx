@@ -6,7 +6,9 @@ interface ContactButtonProps {
 export default function ContactButton({ label = 'Contact Me', className = '' }: ContactButtonProps) {
   return (
     <a
-      href="mailto:lucas.mar.jua@gmail.com"
+      href="https://www.linkedin.com/in/lucas-martinez-a4b955406/"
+      target="_blank"
+      rel="noopener noreferrer"
       className={`inline-block rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white outline outline-2 outline-white outline-offset-[-3px] transition-transform duration-200 hover:scale-105 ${className}`}
       style={{
         background:
