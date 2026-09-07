@@ -1,7 +1,5 @@
 import FadeIn from '../components/FadeIn';
-import Magnet from '../components/Magnet';
 import ContactButton from '../components/ContactButton';
-import HeroAvatar from '../components/HeroAvatar';
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -34,18 +32,6 @@ export default function HeroSection() {
               Hi, i&apos;m lucas
             </h1>
           </div>
-        </FadeIn>
-
-        <FadeIn delay={0.6} y={30}>
-          <Magnet
-            padding={150}
-            strength={3}
-            activeTransition="transform 0.3s ease-out"
-            inactiveTransition="transform 0.6s ease-in-out"
-            className="absolute left-1/2 top-1/2 z-10 w-[280px] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:bottom-0 sm:w-[360px] sm:translate-y-0 md:w-[440px] lg:w-[520px]"
-          >
-            <HeroAvatar className="w-full" />
-          </Magnet>
         </FadeIn>
       </div>
 
