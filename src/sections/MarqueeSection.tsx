@@ -13,13 +13,13 @@ import mastercinemaMaraton from '../assets/screenshots/mastercinema-maraton.webp
 type Shot = { src: string; alt: string; position?: string } | { label: string };
 
 const PROJECT_SHOTS: Shot[] = [
-  { src: onedayStart, alt: 'OneDay era-selection start screen' },
+  { src: onedayStart, alt: 'OneDay almanac-style home screen listing the six playable eras' },
   { src: pawmatchChat, alt: 'PawMatch conversation with a match', position: 'top' },
   { src: retrogamesPortal, alt: 'RetroGames arcade landing screen' },
   { src: mastercinemaVestibulo, alt: 'MasterCinema landing screen', position: 'top' },
   { label: 'Antonio Valencia Estilistas — booking' },
   { label: 'Trivia (Unity) — gameplay' },
-  { src: onedayDayLoop, alt: 'OneDay day loop with the recurring NPC Kleon' },
+  { src: onedayDayLoop, alt: 'OneDay decision screen in Córdoba, 961' },
   { src: pawmatchProfile, alt: 'PawMatch dog profile screen', position: 'top' },
   { src: retrogamesTienda, alt: 'RetroGames cabinet skins shop', position: 'top' },
   { src: mastercinemaMaraton, alt: 'MasterCinema trivia question in Marathon mode' },

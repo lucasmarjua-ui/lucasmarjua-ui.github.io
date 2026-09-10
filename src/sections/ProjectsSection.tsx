@@ -35,9 +35,9 @@ const PROJECTS: Project[] = [
     buttonLabel: 'Live Project',
     href: 'https://lucasmarjua-ui.github.io/oneday/',
     images: [
-      { src: onedayStart, alt: 'OneDay era-selection start screen' },
-      { src: onedayDayLoop, alt: 'OneDay day loop — encounter with the recurring NPC Kleon' },
-      { src: onedaySummary, alt: 'OneDay end-of-day summary screen with stats and daily objectives' },
+      { src: onedayStart, alt: 'OneDay almanac-style home screen listing the six playable eras' },
+      { src: onedayDayLoop, alt: 'OneDay decision screen in Córdoba, 961 — three narrative choices' },
+      { src: onedaySummary, alt: 'OneDay end-of-day persona reveal in Edo, 1750, with stats and objectives' },
     ],
   },
   {
