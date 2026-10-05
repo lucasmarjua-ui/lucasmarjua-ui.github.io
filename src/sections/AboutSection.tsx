@@ -68,7 +68,7 @@ export default function AboutSection() {
           <AnimatedText
             className="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
             style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
-            text="I'm a self-taught developer who builds mobile apps, web experiences, and games from the ground up — from Flutter apps with real-time data to fully data-driven browser games with their own engines. I enjoy turning ambitious ideas into working, polished products, and I'm always looking for the next thing to build."
+            text="I'm a recent graduate in Multiplatform Application Development (UK equivalent: RQF Level 5 / HND), fully bilingual in English and Spanish. I learn by shipping: Flutter apps with layered architectures, data-driven browser games with their own engines and test suites, and cloud accounts and leaderboards on Firebase. I'm looking for my first Junior Developer role in a team where I can keep learning fast."
           />
         </div>
 

@@ -62,8 +62,8 @@ export default function AnimatedText({ text, className, style }: AnimatedTextPro
   });
 
   return (
-    <p ref={ref} className={className} style={style}>
-      {nodes}
+    <p ref={ref} className={className} style={style} aria-label={text}>
+      <span aria-hidden="true">{nodes}</span>
     </p>
   );
 }

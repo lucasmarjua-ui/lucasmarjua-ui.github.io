@@ -1,15 +1,16 @@
 interface ContactButtonProps {
   label?: string;
+  href?: string;
   className?: string;
 }
 
-export default function ContactButton({ label = 'Contact Me', className = '' }: ContactButtonProps) {
+export default function ContactButton({ label = 'Contact Me', href = '#contact', className = '' }: ContactButtonProps) {
+  const external = href.startsWith('http');
   return (
     <a
-      href="https://www.linkedin.com/in/lucas-martinez-a4b955406/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-block rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white outline outline-2 outline-white outline-offset-[-3px] transition-transform duration-200 hover:scale-105 ${className}`}
+      href={href}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      className={`inline-block whitespace-nowrap rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white outline outline-2 outline-white outline-offset-[-3px] transition-transform duration-200 hover:scale-105 ${className}`}
       style={{
         background:
           'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
