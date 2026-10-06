@@ -44,15 +44,15 @@ export const PROJECTS: Project[] = [
     id: 'oneday',
     name: 'OneDay',
     tagline:
-      'A historical decision game: live the Moon landing, the Great Pyramid, Tenochtitlan in 1519 or D-Day as a 3D character modelled and animated in Blender, who acts out every choice. Learn as you play, and find the real ending and the ones history missed.',
-    stat: '4 historical events · Blender 3D · 219 tests',
+      'A historical decision game: live the Great Pyramid, Tenochtitlan in 1519, D-Day, the Moon landing or the night the Berlin Wall fell as a 3D character modelled and animated in Blender, who acts out every choice. Pass the exam at nightfall, climb from Curious Visitor to Witness of the Ages, and find the real ending and the ones history missed.',
+    stat: '5 historical events · Blender 3D · 247 tests',
     stack: ['Vanilla JS', 'three.js', 'Blender (bpy)', 'WebGL shaders', 'Firebase'],
     live: 'https://lucasmarjua-ui.github.io/oneday/',
     code: 'https://github.com/lucasmarjua-ui/oneday',
     shots: [
-      { src: onedayStart, alt: 'OneDay title screen: the Great Pyramid of Giza under construction as a floating pixel-art diorama' },
+      { src: onedayStart, alt: 'OneDay title screen: the Brandenburg Gate and the Berlin Wall as a floating pixel-art diorama, with the historian rank and a timeline of five events' },
       { src: onedayDayLoop, alt: 'OneDay on Omaha Beach, 1944: a combat medic by the seawall, Belgian gates, a burning landing craft and a destroyer offshore, modelled in Blender' },
-      { src: onedaySummary, alt: 'OneDay ending screen for Tenochtitlan, 1519: the historical ending and what really happened' },
+      { src: onedaySummary, alt: 'OneDay ending screen for the fall of the Berlin Wall: the historical ending, experience earned, a new rank and medals' },
     ],
   },
   {
@@ -145,6 +145,12 @@ export const SKILLS = [
 
 // Dates come from each repository's first commit.
 export const LOG = [
+  {
+    date: 'Oct 2026',
+    title: 'OneDay: the Berlin Wall, and a career',
+    body: 'A fifth event, the night of 9 November 1989, with its own Blender set. Plus an exam on what each day taught, eight historian ranks, fourteen medals, an archive of every fact learned and one daily challenge for everyone.',
+    href: 'https://lucasmarjua-ui.github.io/oneday/',
+  },
   {
     date: 'Oct 2026',
     title: 'Rebuilt every OneDay set',
