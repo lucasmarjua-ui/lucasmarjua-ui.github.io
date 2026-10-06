@@ -2,37 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 html,
-body,
-#root {
-  background-color: #0c0c0c;
+body {
+  background-color: #0c0c0b;
+  color: #ecebe3;
 }
 
 body {
-  font-family: 'Kanit', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Silkscreen', ui-monospace, monospace;
+  letter-spacing: 0.03em;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #4ade80;
+  color: #0c0c0b;
 }
 
 :focus-visible {
-  outline: 2px solid #d7e2ea;
+  outline: 2px solid #4ade80;
   outline-offset: 3px;
 }
 
-.hero-heading {
-  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+img.pixelated,
+svg.pixelated {
+  image-rendering: pixelated;
+}
+
+@layer components {
+  .panel {
+    @apply border border-line bg-panel;
+    box-shadow: 5px 5px 0 #262722;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 border-2 px-5 py-2.5 text-xs uppercase tracking-[0.12em] transition-transform duration-100;
+  }
+
+  .btn:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none !important;
+  }
+
+  .btn-primary {
+    @apply border-cream bg-cream text-ink;
+    box-shadow: 4px 4px 0 #3a3b35;
+  }
+
+  .btn-ghost {
+    @apply border-line bg-well text-cream hover:border-cream;
+    box-shadow: 4px 4px 0 #1f201c;
+  }
+
+  .link-underline {
+    @apply border-b-2 border-cream pb-1 transition-colors hover:border-leaf hover:text-leaf;
+  }
+
+  .tag {
+    @apply border border-line px-2 py-1 text-[0.6rem] uppercase tracking-[0.08em] text-muted;
+  }
+
+  .section-title {
+    @apply text-2xl uppercase tracking-[0.1em] text-cream sm:text-3xl;
+    text-shadow: 3px 3px 0 #2e302b;
+  }
+
+  .label {
+    @apply text-[0.65rem] uppercase tracking-[0.12em] text-muted;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes walk {
+  from {
+    left: var(--from);
+  }
+  to {
+    left: var(--to);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -44,6 +116,63 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Build animations (see src/build.tsx) */
+.trail-pixel {
+  position: absolute;
+  z-index: 29;
+  width: 4px;
+  height: 4px;
+  background: #4ade80;
+  pointer-events: none;
+  animation: trail 700ms steps(5) forwards;
+}
+
+@keyframes trail {
+  to {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.frame-building {
+  animation: frame-build 600ms steps(10) both;
+}
+
+@keyframes frame-build {
+  0% {
+    clip-path: inset(0 100% calc(100% - 6px) 0);
+  }
+  45% {
+    clip-path: inset(0 0 calc(100% - 6px) 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.pixel-cell {
+  background: #121311;
+  outline: 1px solid #1c1d1a;
+}
+
+@keyframes pixel-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.pop-in {
+  animation: pop-in 200ms steps(4) both;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
 }
