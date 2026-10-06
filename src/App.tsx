@@ -1,29 +1,36 @@
-import HeroSection from './sections/HeroSection';
-import MarqueeSection from './sections/MarqueeSection';
-import AboutSection from './sections/AboutSection';
-import SkillsSection from './sections/SkillsSection';
-import ProjectsSection from './sections/ProjectsSection';
-import ContactSection from './sections/ContactSection';
+import Toast from './components/Toast';
+import { SecretsProvider } from './secrets';
+import About from './sections/About';
+import Contact from './sections/Contact';
+import Contributions from './sections/Contributions';
+import Footer from './sections/Footer';
+import Header from './sections/Header';
+import Hero from './sections/Hero';
+import Log from './sections/Log';
+import Projects from './sections/Projects';
+import Skills from './sections/Skills';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
+    <SecretsProvider>
       <a
-        href="#about"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-[#0C0C0C]"
+        href="#projects"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-cream focus:px-4 focus:py-2 focus:text-ink"
       >
         Skip to content
       </a>
-      <header>
-        <HeroSection />
-      </header>
-      <main>
-        <MarqueeSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
+      <Header />
+      <main className="overflow-x-clip">
+        <Hero />
+        <Projects />
+        <About />
+        <Skills />
+        <Contributions />
+        <Log />
+        <Contact />
       </main>
-    </div>
+      <Footer />
+      <Toast />
+    </SecretsProvider>
   );
 }

@@ -4,7 +4,7 @@
 [![Live site](https://img.shields.io/badge/live-lucasmarjua--ui.github.io-8A2BE2)](https://lucasmarjua-ui.github.io/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-My personal portfolio: a single-page site that introduces me, lists what I work with, and walks through my projects with real screenshots.
+My personal portfolio: a pixel-art, single-page site that introduces me, walks through my projects with real screenshots and hides a few secrets along the way.
 
 **[▶ Visit the site](https://lucasmarjua-ui.github.io/)**
 
@@ -13,34 +13,38 @@ My personal portfolio: a single-page site that introduces me, lists what I work 
 | Area | Tools |
 |---|---|
 | UI | React 18, TypeScript |
-| Styling | Tailwind CSS, self-hosted Kanit font (`@fontsource/kanit`) |
-| Motion | Framer Motion (scroll-linked text reveal, stacked project cards) |
-| Icons | Lucide React |
+| Styling | Tailwind CSS, self-hosted Silkscreen pixel font (`@fontsource/silkscreen`) |
+| Pixel art | Hand-drawn sprites rendered as crisp SVG from text grids (`src/components/Pixel.tsx`) |
+| Data | Live GitHub contributions from [github-contributions-api](https://github.com/grubersjoe/github-contributions-api) |
 | Build & deploy | Vite, GitHub Actions → GitHub Pages |
 
 ## Sections
 
-1. **Hero** — name, role, availability and a contact call-to-action.
-2. **Marquee** — two scroll-linked rows of project screenshots (decorative, hidden from screen readers).
-3. **About** — background and what I'm looking for, revealed character by character on scroll.
-4. **What I do** — five skill areas, each with the tools I use.
-5. **Projects** — sticky, scaling cards for [OneDay](https://github.com/lucasmarjua-ui/oneday), [PawMatch](https://github.com/lucasmarjua-ui/pawmatch), [RetroGames](https://github.com/lucasmarjua-ui/retrogames) and [MasterCinema](https://github.com/lucasmarjua-ui/mastercinema), each with a description, tech stack, live demo and code links.
-6. **Contact** — email, LinkedIn and GitHub.
+1. **Hero** — a "building" intro that types out my name (skippable with Esc), my role and links, and two pixel dogs that roam the page.
+2. **Projects** — cards for [OneDay](https://github.com/lucasmarjua-ui/oneday), [RetroGames](https://github.com/lucasmarjua-ui/retrogames), [MasterCinema](https://github.com/lucasmarjua-ui/mastercinema) and [PawMatch](https://github.com/lucasmarjua-ui/pawmatch), each with a screenshot stepper, stack, live demo and code links.
+3. **About me** — a "Player 1" character sheet: class, base, inventory and special move.
+4. **Skill tree** — six skill areas with the tools I use.
+5. **A year in blocks** — my GitHub contributions as a block grid, with a box to compare your own year.
+6. **Log** — what I've shipped, newest first.
+7. **Contact** — email, LinkedIn and GitHub, plus a small terminal (`help` to start).
+
+There are 7 secrets on the page; the counter in the footer tracks the ones you've found.
 
 ## Accessibility
 
-- Semantic landmarks (`header`, `nav`, `main`, `footer`) and a skip link.
-- Visible keyboard focus rings.
-- Animated text keeps its full content in an `aria-label`.
-- Animations and smooth scrolling are reduced when the OS asks for reduced motion.
+- Semantic landmarks (`header`, `main`, `footer`) and a skip link.
+- Visible keyboard focus rings; every interactive sprite is a real button with a label.
+- The intro, roaming sprites and reveal animations are switched off when the OS asks for reduced motion.
 
 ## Project structure
 
 ```
 src/
-├── components/   # Reusable UI: buttons, FadeIn, AnimatedText
+├── components/   # Pixel sprites and icons, Reveal, RoamingDog, Toast
 ├── sections/     # One component per page section
 ├── assets/       # Project screenshots (WebP)
+├── data.ts       # Projects, skills, log and links in one place
+├── secrets.tsx   # Secrets context (persisted in localStorage)
 ├── App.tsx       # Page layout
 └── main.tsx      # Entry point, font imports
 ```
