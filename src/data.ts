@@ -44,15 +44,15 @@ export const PROJECTS: Project[] = [
     id: 'oneday',
     name: 'OneDay',
     tagline:
-      'A decision game on a 3D pixel-art stage. Pick one of six eras and live a single day: your character walks to each scene and acts out every choice.',
-    stat: '6 eras · 3D pixel art · 207 tests',
+      'A historical decision game on a 3D pixel-art stage: live the Moon landing, the Great Pyramid, Tenochtitlan in 1519 or D-Day, learn as you play, and find the real ending and the ones history missed.',
+    stat: '4 historical events · 27 endings · 210 tests',
     stack: ['Vanilla JS', 'three.js', 'WebGL shaders', 'WebAudio', 'Firebase'],
     live: 'https://lucasmarjua-ui.github.io/oneday/',
     code: 'https://github.com/lucasmarjua-ui/oneday',
     shots: [
-      { src: onedayStart, alt: 'OneDay title screen: Ancient Greece as a floating pixel-art island' },
-      { src: onedayDayLoop, alt: 'OneDay decision in the souk of Córdoba, 961, with the character on stage' },
-      { src: onedaySummary, alt: 'OneDay end of the day in Edo, 1750, at night with the persona reveal' },
+      { src: onedayStart, alt: 'OneDay title screen: Omaha Beach on D-Day as a floating pixel-art diorama' },
+      { src: onedayDayLoop, alt: 'OneDay in Tenochtitlan, 1519: Malintzin on the causeway deciding how to translate Cortés' },
+      { src: onedaySummary, alt: 'OneDay ending screen for Apollo 11: an alternative ending next to what really happened' },
     ],
   },
   {
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
 ];
 
 export const INVENTORY = [
-  { item: 'OneDay', value: '3D pixel art' },
+  { item: 'OneDay', value: '4 events in history' },
   { item: 'RetroGames', value: '6 games' },
   { item: 'MasterCinema', value: '5 categories' },
   { item: 'PawMatch', value: 'Flutter app' },
@@ -147,8 +147,14 @@ export const SKILLS = [
 export const LOG = [
   {
     date: 'Oct 2026',
+    title: 'Turned OneDay into history',
+    body: 'Eras became real historical days: Apollo 11, the Great Pyramid, Tenochtitlan 1519 and Omaha Beach. Historical notes on every choice, one real ending and many alternative ones.',
+    href: 'https://lucasmarjua-ui.github.io/oneday/',
+  },
+  {
+    date: 'Oct 2026',
     title: 'Took OneDay to 3D',
-    body: 'Six pixel-art islands in three.js with an outline shader, a character who acts out every choice, a day-night cycle and generative music.',
+    body: 'Pixel-art dioramas in three.js with an outline shader, a character who acts out every choice, a day-night cycle and generative music.',
     href: 'https://lucasmarjua-ui.github.io/oneday/',
   },
   {
@@ -160,7 +166,7 @@ export const LOG = [
   {
     date: 'Sep 2026',
     title: 'Shipped OneDay',
-    body: 'Six eras, one day each. Content is pure JSON, checked by a unit-test suite that runs in CI on every push.',
+    body: 'A decision game built on one idea: live a single day, one choice at a time. Content is pure JSON, checked by a unit-test suite that runs in CI on every push.',
     href: 'https://lucasmarjua-ui.github.io/oneday/',
   },
   {
