@@ -44,15 +44,15 @@ export const PROJECTS: Project[] = [
     id: 'oneday',
     name: 'OneDay',
     tagline:
-      'A data-driven decision game. Pick one of six eras and live a single day, one card at a time. New eras are pure JSON.',
-    stat: '6 eras · EN / ES · tests + CI',
-    stack: ['Vanilla JS', 'ES modules', 'Firebase', 'Node tests'],
+      'A decision game on a 3D pixel-art stage. Pick one of six eras and live a single day: your character walks to each scene and acts out every choice.',
+    stat: '6 eras · 3D pixel art · 207 tests',
+    stack: ['Vanilla JS', 'three.js', 'WebGL shaders', 'WebAudio', 'Firebase'],
     live: 'https://lucasmarjua-ui.github.io/oneday/',
     code: 'https://github.com/lucasmarjua-ui/oneday',
     shots: [
-      { src: onedayStart, alt: 'OneDay almanac-style home screen listing the six playable eras' },
-      { src: onedayDayLoop, alt: 'OneDay decision screen in Córdoba, 961, with three narrative choices' },
-      { src: onedaySummary, alt: 'OneDay end-of-day persona reveal in Edo, 1750' },
+      { src: onedayStart, alt: 'OneDay title screen: Ancient Greece as a floating pixel-art island' },
+      { src: onedayDayLoop, alt: 'OneDay decision in the souk of Córdoba, 961, with the character on stage' },
+      { src: onedaySummary, alt: 'OneDay end of the day in Edo, 1750, at night with the persona reveal' },
     ],
   },
   {
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
 ];
 
 export const INVENTORY = [
-  { item: 'OneDay', value: '6 eras' },
+  { item: 'OneDay', value: '3D pixel art' },
   { item: 'RetroGames', value: '6 games' },
   { item: 'MasterCinema', value: '5 categories' },
   { item: 'PawMatch', value: 'Flutter app' },
@@ -128,8 +128,8 @@ export const SKILLS = [
   },
   {
     name: 'Games',
-    description: 'Canvas API games and data-driven engines where new content is a JSON file away, plus Unity projects in C#.',
-    stack: ['Canvas API', 'Unity', 'C#'],
+    description: 'A 3D pixel-art stage in three.js with custom shaders, Canvas API games and data-driven engines, plus Unity projects in C#.',
+    stack: ['three.js', 'Canvas API', 'WebAudio', 'Unity', 'C#'],
   },
   {
     name: 'Testing & delivery',
@@ -145,6 +145,12 @@ export const SKILLS = [
 
 // Dates come from each repository's first commit.
 export const LOG = [
+  {
+    date: 'Oct 2026',
+    title: 'Took OneDay to 3D',
+    body: 'Six pixel-art islands in three.js with an outline shader, a character who acts out every choice, a day-night cycle and generative music.',
+    href: 'https://lucasmarjua-ui.github.io/oneday/',
+  },
   {
     date: 'Oct 2026',
     title: 'Rebuilt this site in pixels',
