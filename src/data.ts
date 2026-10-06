@@ -50,8 +50,8 @@ export const PROJECTS: Project[] = [
     live: 'https://lucasmarjua-ui.github.io/oneday/',
     code: 'https://github.com/lucasmarjua-ui/oneday',
     shots: [
-      { src: onedayStart, alt: 'OneDay title screen: Omaha Beach on D-Day as a floating pixel-art diorama' },
-      { src: onedayDayLoop, alt: 'OneDay on the Moon, 1969: Aldrin and Armstrong by the flag, the lunar module and the experiments, modelled in Blender' },
+      { src: onedayStart, alt: 'OneDay title screen: the Great Pyramid of Giza under construction as a floating pixel-art diorama' },
+      { src: onedayDayLoop, alt: 'OneDay on Omaha Beach, 1944: a combat medic by the seawall, Belgian gates, a burning landing craft and a destroyer offshore, modelled in Blender' },
       { src: onedaySummary, alt: 'OneDay ending screen for Tenochtitlan, 1519: the historical ending and what really happened' },
     ],
   },
@@ -145,6 +145,12 @@ export const SKILLS = [
 
 // Dates come from each repository's first commit.
 export const LOG = [
+  {
+    date: 'Oct 2026',
+    title: 'Rebuilt every OneDay set',
+    body: 'Event by event, every scene remodelled in Blender from the history: Columbia and Eagle cut away, the workers\' town at Giza, the palace of Axayacatl, the hold of a troopship and Rommel\'s beach obstacles. Each day rebalanced so no turn is filler.',
+    href: 'https://lucasmarjua-ui.github.io/oneday/',
+  },
   {
     date: 'Oct 2026',
     title: 'Modelled OneDay in Blender',
