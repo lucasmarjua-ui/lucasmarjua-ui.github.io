@@ -44,15 +44,15 @@ export const PROJECTS: Project[] = [
     id: 'oneday',
     name: 'OneDay',
     tagline:
-      'A historical decision game on a 3D pixel-art stage: live the Moon landing, the Great Pyramid, Tenochtitlan in 1519 or D-Day, learn as you play, and find the real ending and the ones history missed.',
-    stat: '4 historical events · 27 endings · 210 tests',
-    stack: ['Vanilla JS', 'three.js', 'WebGL shaders', 'WebAudio', 'Firebase'],
+      'A historical decision game: live the Moon landing, the Great Pyramid, Tenochtitlan in 1519 or D-Day as a 3D character modelled and animated in Blender, who acts out every choice. Learn as you play, and find the real ending and the ones history missed.',
+    stat: '4 historical events · Blender 3D · 219 tests',
+    stack: ['Vanilla JS', 'three.js', 'Blender (bpy)', 'WebGL shaders', 'Firebase'],
     live: 'https://lucasmarjua-ui.github.io/oneday/',
     code: 'https://github.com/lucasmarjua-ui/oneday',
     shots: [
       { src: onedayStart, alt: 'OneDay title screen: Omaha Beach on D-Day as a floating pixel-art diorama' },
-      { src: onedayDayLoop, alt: 'OneDay in Tenochtitlan, 1519: Malintzin on the causeway deciding how to translate Cortés' },
-      { src: onedaySummary, alt: 'OneDay ending screen for Apollo 11: an alternative ending next to what really happened' },
+      { src: onedayDayLoop, alt: 'OneDay on the Moon, 1969: Aldrin and Armstrong by the flag, the lunar module and the experiments, modelled in Blender' },
+      { src: onedaySummary, alt: 'OneDay ending screen for Tenochtitlan, 1519: the historical ending and what really happened' },
     ],
   },
   {
@@ -128,8 +128,8 @@ export const SKILLS = [
   },
   {
     name: 'Games',
-    description: 'A 3D pixel-art stage in three.js with custom shaders, Canvas API games and data-driven engines, plus Unity projects in C#.',
-    stack: ['three.js', 'Canvas API', 'WebAudio', 'Unity', 'C#'],
+    description: 'A 3D pixel-art stage in three.js with custom shaders, characters and sets modelled and animated in Blender, Canvas API games and data-driven engines, plus Unity projects in C#.',
+    stack: ['three.js', 'Blender', 'Canvas API', 'WebAudio', 'Unity', 'C#'],
   },
   {
     name: 'Testing & delivery',
@@ -145,6 +145,12 @@ export const SKILLS = [
 
 // Dates come from each repository's first commit.
 export const LOG = [
+  {
+    date: 'Oct 2026',
+    title: 'Modelled OneDay in Blender',
+    body: 'A 3D character with 30 animations and the scene sets, built by Python scripts in headless Blender. Every choice is acted out, characters path around obstacles, and every dialogue carries a historical note.',
+    href: 'https://lucasmarjua-ui.github.io/oneday/',
+  },
   {
     date: 'Oct 2026',
     title: 'Turned OneDay into history',
