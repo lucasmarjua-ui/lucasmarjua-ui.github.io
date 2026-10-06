@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import PlaceholderImage from '../components/PlaceholderImage';
 
 import onedayStart from '../assets/screenshots/oneday-start.webp';
 import onedayDayLoop from '../assets/screenshots/oneday-day-loop.webp';
@@ -10,15 +9,13 @@ import retrogamesTienda from '../assets/screenshots/retrogames-tienda.webp';
 import mastercinemaVestibulo from '../assets/screenshots/mastercinema-vestibulo.webp';
 import mastercinemaMaraton from '../assets/screenshots/mastercinema-maraton.webp';
 
-type Shot = { src: string; alt: string; position?: string } | { label: string };
+type Shot = { src: string; alt: string; position?: string };
 
 const PROJECT_SHOTS: Shot[] = [
   { src: onedayStart, alt: 'OneDay almanac-style home screen listing the six playable eras' },
   { src: pawmatchChat, alt: 'PawMatch conversation with a match', position: 'top' },
   { src: retrogamesPortal, alt: 'RetroGames arcade landing screen' },
   { src: mastercinemaVestibulo, alt: 'MasterCinema landing screen', position: 'top' },
-  { label: 'Antonio Valencia Estilistas — booking' },
-  { label: 'Trivia (Unity) — gameplay' },
   { src: onedayDayLoop, alt: 'OneDay decision screen in Córdoba, 961' },
   { src: pawmatchProfile, alt: 'PawMatch dog profile screen', position: 'top' },
   { src: retrogamesTienda, alt: 'RetroGames cabinet skins shop', position: 'top' },
@@ -30,19 +27,15 @@ const row1 = Array(3).fill(PROJECT_SHOTS.slice(0, half)).flat();
 const row2 = Array(3).fill(PROJECT_SHOTS.slice(half)).flat();
 
 function MarqueeTile({ shot }: { shot: Shot }) {
-  const className = 'h-[270px] w-[420px] shrink-0 rounded-2xl';
-  if ('src' in shot) {
-    return (
-      <img
-        src={shot.src}
-        alt={shot.alt}
-        className={`${className} block object-cover`}
-        style={{ objectPosition: shot.position ?? 'center' }}
-        loading="lazy"
-      />
-    );
-  }
-  return <PlaceholderImage label={shot.label} className={className} />;
+  return (
+    <img
+      src={shot.src}
+      alt={shot.alt}
+      className="block h-[200px] w-[310px] shrink-0 rounded-2xl object-cover sm:h-[270px] sm:w-[420px]"
+      style={{ objectPosition: shot.position ?? 'center' }}
+      loading="lazy"
+    />
+  );
 }
 
 export default function MarqueeSection() {
@@ -72,7 +65,7 @@ export default function MarqueeSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="overflow-hidden bg-[#0C0C0C] pb-10 pt-24 sm:pt-32 md:pt-40">
+    <section ref={sectionRef} aria-hidden="true" className="overflow-hidden bg-[#0C0C0C] pb-10 pt-24 sm:pt-32 md:pt-40">
       <div className="flex flex-col gap-3">
         <div ref={row1Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
           {row1.map((shot, i) => (
