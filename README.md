@@ -15,6 +15,7 @@ My personal portfolio: a pixel-art, single-page site that introduces me, walks t
 | UI | React 18, TypeScript |
 | Styling | Tailwind CSS, self-hosted Silkscreen pixel font (`@fontsource/silkscreen`) |
 | Pixel art | Hand-drawn sprites rendered as crisp SVG from text grids (`src/components/Pixel.tsx`) |
+| Build animations | Sections assemble as you scroll: frames draw, images resolve block by block and text types letter by letter while a builder dog flies to each spot (`src/build.tsx`) |
 | Data | Live GitHub contributions from [github-contributions-api](https://github.com/grubersjoe/github-contributions-api) |
 | Build & deploy | Vite, GitHub Actions → GitHub Pages |
 
@@ -34,16 +35,18 @@ There are 7 secrets on the page; the counter in the footer tracks the ones you'v
 
 - Semantic landmarks (`header`, `main`, `footer`) and a skip link.
 - Visible keyboard focus rings; every interactive sprite is a real button with a label.
-- The intro, roaming sprites and reveal animations are switched off when the OS asks for reduced motion.
+- Typed text keeps its full content for screen readers from the first frame.
+- The intro, build animations and roaming sprites are switched off when the OS asks for reduced motion.
 
 ## Project structure
 
 ```
 src/
-├── components/   # Pixel sprites and icons, Reveal, RoamingDog, Toast
+├── components/   # Pixel sprites and icons, RoamingDog, SectionTitle, Toast
 ├── sections/     # One component per page section
 ├── assets/       # Project screenshots (WebP)
 ├── data.ts       # Projects, skills, log and links in one place
+├── build.tsx     # Build animations: typing text, frames, pixel covers, builder dog
 ├── secrets.tsx   # Secrets context (persisted in localStorage)
 ├── App.tsx       # Page layout
 └── main.tsx      # Entry point, font imports

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { BuildFrame, TypeText, useInView, useSequence, type Phase } from '../build';
 import { Icon } from '../components/Pixel';
-import Reveal from '../components/Reveal';
 import SectionTitle from '../components/SectionTitle';
 import { CONTACTS, EMAIL, LINKS, PROJECTS, SKILLS } from '../data';
 import { SECRETS, useSecrets, type SecretId } from '../secrets';
@@ -18,10 +18,9 @@ const HELP = [
   'clear       clear the screen',
 ];
 
-const WELCOME: Line[] = [
-  { kind: 'out', text: "Hi. This is Lucas's terminal." },
-  { kind: 'out', text: 'Type a command and press enter, or use the buttons below.' },
-];
+const WELCOME = ["Hi. This is Lucas's terminal.", 'Type a command and press enter, or use the buttons below.'];
+
+type StepProps = { phase: Phase; onDone: () => void };
 
 function run(raw: string, unlock: (id: SecretId) => void): Line[] | 'clear' {
   const input = raw.trim();
@@ -92,8 +91,9 @@ const LINE_COLORS: Record<Line['kind'], string> = {
   err: 'text-ember',
 };
 
-function Terminal() {
-  const [lines, setLines] = useState<Line[]>(WELCOME);
+function Terminal({ frame, welcome }: { frame: StepProps; welcome: StepProps[] }) {
+  const [lines, setLines] = useState<Line[]>([]);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [value, setValue] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [cursor, setCursor] = useState(-1);
@@ -112,6 +112,7 @@ function Terminal() {
     setCursor(-1);
     if (result === 'clear') {
       setLines([]);
+      setShowWelcome(false);
       return;
     }
     setLines((prev) => [...prev, { kind: 'in', text: <Prompt>{command}</Prompt> }, ...result]);
@@ -124,7 +125,7 @@ function Terminal() {
   };
 
   return (
-    <div className="panel flex h-full min-h-[380px] flex-col">
+    <BuildFrame {...frame} className="panel flex h-full min-h-[380px] flex-col">
       <div className="flex items-center gap-3 border-b border-line px-4 py-3">
         <span className="flex gap-1.5" aria-hidden="true">
           <span className="h-2 w-2 bg-ember" />
@@ -140,6 +141,12 @@ function Terminal() {
         onClick={() => inputRef.current?.focus()}
         aria-live="polite"
       >
+        {showWelcome &&
+          WELCOME.map((text, i) => (
+            <p key={text} className="text-cream/80">
+              <TypeText text={text} cps={60} {...welcome[i]} />
+            </p>
+          ))}
         {lines.map((line, i) => (
           <p key={i} className={`whitespace-pre-wrap break-words ${LINE_COLORS[line.kind]}`}>
             {line.text}
@@ -188,7 +195,7 @@ function Terminal() {
           Help
         </button>
       </div>
-    </div>
+    </BuildFrame>
   );
 }
 
@@ -201,35 +208,44 @@ function Prompt({ children }: { children?: ReactNode }) {
   );
 }
 
+function ContactRow({ c, phase, onDone }: { c: (typeof CONTACTS)[number] } & StepProps) {
+  return (
+    <li>
+      <a
+        href={c.href}
+        {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className="group flex items-center justify-between gap-4 border-b-2 border-line py-5 transition-colors hover:border-cream"
+        style={{ visibility: phase === 'idle' ? 'hidden' : undefined }}
+      >
+        <span className="text-xl uppercase tracking-[0.08em] sm:text-2xl">
+          <TypeText text={c.label} cps={20} phase={phase} onDone={onDone} />
+        </span>
+        <span className="flex min-w-0 items-center gap-3 text-[0.6rem] uppercase tracking-[0.06em] text-muted group-hover:text-leaf sm:text-[0.65rem]">
+          <span className="truncate">{c.handle}</span>
+          <Icon name="arrowUpRight" />
+        </span>
+      </a>
+    </li>
+  );
+}
+
 export default function Contact() {
+  const ref = useRef<HTMLDivElement>(null);
+  const n = CONTACTS.length;
+  const seq = useSequence(n + 1 + WELCOME.length, useInView(ref));
+
   return (
     <section aria-labelledby="contact" className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20">
       <SectionTitle id="contact" sub="Available immediately for full-time Junior Developer roles. I'd love to hear from you.">
         Contact
       </SectionTitle>
-      <div className="grid gap-12 md:grid-cols-2">
-        <Reveal>
-          <ul>
-            {CONTACTS.map((c) => (
-              <li key={c.label}>
-                <a
-                  href={c.href}
-                  {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="group flex items-center justify-between gap-4 border-b-2 border-line py-5 transition-colors hover:border-cream"
-                >
-                  <span className="text-xl uppercase tracking-[0.08em] sm:text-2xl">{c.label}</span>
-                  <span className="flex min-w-0 items-center gap-3 text-[0.6rem] uppercase tracking-[0.06em] text-muted group-hover:text-leaf sm:text-[0.65rem]">
-                    <span className="truncate">{c.handle}</span>
-                    <Icon name="arrowUpRight" />
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-        <Reveal delay={120}>
-          <Terminal />
-        </Reveal>
+      <div ref={ref} className="grid gap-12 md:grid-cols-2">
+        <ul>
+          {CONTACTS.map((c, i) => (
+            <ContactRow key={c.label} c={c} {...seq.props(i)} />
+          ))}
+        </ul>
+        <Terminal frame={seq.props(n)} welcome={WELCOME.map((_, i) => seq.props(n + 1 + i))} />
       </div>
     </section>
   );

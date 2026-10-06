@@ -82,19 +82,6 @@ svg.pixelated {
   }
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.5s steps(5),
-    transform 0.5s steps(5);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
 @keyframes blink {
   50% {
     opacity: 0;
@@ -132,9 +119,60 @@ svg.pixelated {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
 
-  .reveal {
-    opacity: 1;
-    transform: none;
+/* Build animations (see src/build.tsx) */
+.trail-pixel {
+  position: absolute;
+  z-index: 29;
+  width: 4px;
+  height: 4px;
+  background: #4ade80;
+  pointer-events: none;
+  animation: trail 700ms steps(5) forwards;
+}
+
+@keyframes trail {
+  to {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.frame-building {
+  animation: frame-build 600ms steps(10) both;
+}
+
+@keyframes frame-build {
+  0% {
+    clip-path: inset(0 100% calc(100% - 6px) 0);
+  }
+  45% {
+    clip-path: inset(0 0 calc(100% - 6px) 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.pixel-cell {
+  background: #121311;
+  outline: 1px solid #1c1d1a;
+}
+
+@keyframes pixel-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.pop-in {
+  animation: pop-in 200ms steps(4) both;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
 }

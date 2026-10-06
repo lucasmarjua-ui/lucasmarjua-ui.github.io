@@ -1,5 +1,5 @@
-import { useEffect, useState, type FormEvent } from 'react';
-import Reveal from '../components/Reveal';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useBuild, useInView } from '../build';
 import RoamingDog from '../components/RoamingDog';
 import SectionTitle from '../components/SectionTitle';
 import { GITHUB_USER } from '../data';
@@ -34,7 +34,32 @@ function useYear(user: string | null): Load | null {
   return state;
 }
 
-function Grid({ load, label }: { load: Load; label: string }) {
+function Grid({ load, label, start }: { load: Load; label: string; start: boolean }) {
+  const { instant, point } = useBuild();
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [lit, setLit] = useState(instant ? Infinity : 0);
+  const ready = load.status === 'ok' && start;
+
+  // Light the grid up one week (column) at a time, with the builder dog painting it.
+  useEffect(() => {
+    if (!ready || lit === Infinity) return;
+    let col = 0;
+    const id = window.setInterval(() => {
+      col += 1;
+      setLit(col);
+      const cell = gridRef.current?.children[Math.min(col * 7, gridRef.current.children.length - 1)] as HTMLElement | undefined;
+      if (cell) {
+        const r = cell.getBoundingClientRect();
+        point(r.left, r.top + 30);
+      }
+      if (col > 54) {
+        window.clearInterval(id);
+        setLit(Infinity);
+      }
+    }, 28);
+    return () => window.clearInterval(id);
+  }, [ready]);
+
   // Pad the first week so rows line up with weekdays (Sunday on top), like GitHub.
   const days = load.status === 'ok' ? load.year.days : [];
   const pad = days.length ? new Date(`${days[0].date}T00:00:00`).getDay() : 0;
@@ -43,6 +68,7 @@ function Grid({ load, label }: { load: Load; label: string }) {
   return (
     <div className="overflow-x-auto pb-2">
       <div
+        ref={gridRef}
         className="grid w-max grid-flow-col grid-rows-7 gap-[3px]"
         role="img"
         aria-label={load.status === 'ok' ? `${label}: ${load.year.total} contributions in the last year` : `${label}: loading`}
@@ -52,7 +78,7 @@ function Grid({ load, label }: { load: Load; label: string }) {
             key={i}
             title={day ? `${day.count} on ${day.date}` : undefined}
             className={`h-[11px] w-[11px] sm:h-[14px] sm:w-[14px] ${load.status === 'loading' ? 'animate-pulse' : ''}`}
-            style={{ background: day ? LEVEL_COLORS[day.level] ?? LEVEL_COLORS[0] : load.status === 'ok' ? 'transparent' : LEVEL_COLORS[0] }}
+            style={{ background: day ? LEVEL_COLORS[Math.floor(i / 7) < lit ? day.level : 0] ?? LEVEL_COLORS[0] : load.status === 'ok' ? 'transparent' : LEVEL_COLORS[0] }}
           />
         ))}
       </div>
@@ -80,6 +106,8 @@ export default function Contributions() {
   const [rival, setRival] = useState<string | null>(null);
   const [error, setError] = useState('');
   const theirs = useYear(rival);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -98,16 +126,16 @@ export default function Contributions() {
         A year in blocks
       </SectionTitle>
 
-      <Reveal>
+      <div ref={ref}>
         <div className="relative h-14">
           <RoamingDog top="8px" start={0.4} speed={0.8} />
         </div>
-        {mine && <Grid load={mine} label={`@${GITHUB_USER}`} />}
+        {mine && <Grid load={mine} label={`@${GITHUB_USER}`} start={inView} />}
         {mine && <Caption load={mine} user={GITHUB_USER} />}
 
         {theirs && rival && (
           <div className="mt-10">
-            <Grid load={theirs} label={`@${rival}`} />
+            <Grid load={theirs} label={`@${rival}`} start />
             <Caption load={theirs} user={rival} />
           </div>
         )}
@@ -136,7 +164,7 @@ export default function Contributions() {
             </p>
           )}
         </form>
-      </Reveal>
+      </div>
     </section>
   );
 }
