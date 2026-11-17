@@ -22,7 +22,7 @@ My personal portfolio: a pixel-art, single-page site that introduces me, walks t
 ## Sections
 
 1. **Hero** — a "building" intro that types out my name (skippable with Esc), my role and links, and two pixel dogs that roam the page.
-2. **Projects** — cards for [OneDay](https://github.com/lucasmarjua-ui/oneday), [RetroGames](https://github.com/lucasmarjua-ui/retrogames), [MasterCinema](https://github.com/lucasmarjua-ui/mastercinema) and [PawMatch](https://github.com/lucasmarjua-ui/pawmatch), each with a screenshot stepper, stack, live demo and code links.
+2. **Projects** — a featured card for [MasterCinema](https://apps.apple.com/app/mastercinema/id6829498680), my movie-trivia game on the App Store, then cards for [OneDay](https://github.com/lucasmarjua-ui/oneday), [RetroGames](https://github.com/lucasmarjua-ui/retrogames), [PawMatch](https://github.com/lucasmarjua-ui/pawmatch) and [MasterCinema Web](https://github.com/lucasmarjua-ui/mastercinema), each with a screenshot stepper, stack and links.
 3. **About me** — a "Player 1" character sheet: class, base, inventory and special move.
 4. **Skill tree** — six skill areas with the tools I use.
 5. **A year in blocks** — my GitHub contributions as a block grid, with a box to compare your own year.

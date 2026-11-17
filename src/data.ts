@@ -10,6 +10,10 @@ import retrogamesTienda from './assets/screenshots/retrogames-tienda.webp';
 import mastercinemaVestibulo from './assets/screenshots/mastercinema-vestibulo.webp';
 import mastercinemaMaraton from './assets/screenshots/mastercinema-maraton.webp';
 import mastercinemaResumen from './assets/screenshots/mastercinema-resumen.webp';
+import mcIosKeyArt from './assets/screenshots/mastercinema-ios-key-art.webp';
+import mcIosModes from './assets/screenshots/mastercinema-ios-modes.webp';
+import mcIosDuels from './assets/screenshots/mastercinema-ios-duels.webp';
+import mcIosCollect from './assets/screenshots/mastercinema-ios-collect.webp';
 
 export const GITHUB_USER = 'lucasmarjua-ui';
 export const EMAIL = 'lucas.mar.jua@gmail.com';
@@ -18,6 +22,7 @@ export const LINKS = {
   email: `mailto:${EMAIL}`,
   linkedin: 'https://www.linkedin.com/in/lucas-martinez-a4b955406/',
   github: `https://github.com/${GITHUB_USER}`,
+  appStore: 'https://apps.apple.com/app/mastercinema/id6829498680',
 };
 
 export const CONTACTS = [
@@ -35,11 +40,36 @@ export interface Project {
   stat: string;
   stack: string[];
   live?: string;
-  code: string;
+  /** Label for the live link. Defaults to "Play it". */
+  liveLabel?: string;
+  /** Omitted when the source is private. */
+  code?: string;
+  /** Shown as a badge on the card, e.g. "Live on the App Store". */
+  badge?: string;
+  /** Spans the full width of the grid, with the screenshots beside the text. */
+  featured?: boolean;
   shots: Shot[];
 }
 
 export const PROJECTS: Project[] = [
+  {
+    id: 'mastercinema',
+    name: 'MasterCinema',
+    tagline:
+      'A movie-trivia game for iPhone that I designed, built and published on my own, from a sketch on paper to approval by Apple. Four modes (Quick Match, Cinema Hunt, Guess the Movie and Ranked 1v1), asynchronous duels against players and friends, five ranks with weekly rewards and a collection of vintage cinema tickets. In English and Spanish, with new questions sent from the server without an app update.',
+    stat: 'On the App Store · 5,700+ questions · EN / ES',
+    stack: ['Flutter', 'Dart', 'Firebase', 'Cloud Functions', 'In-app purchases', 'Codemagic CI'],
+    live: LINKS.appStore,
+    liveLabel: 'App Store',
+    badge: 'Live on the App Store',
+    featured: true,
+    shots: [
+      { src: mcIosKeyArt, alt: 'MasterCinema key art: a red cinema ticket surrounded by film-category illustrations' },
+      { src: mcIosModes, alt: 'MasterCinema App Store screenshots: a Quick Match question, Guess the Movie clues and Cinema Hunt' },
+      { src: mcIosDuels, alt: 'MasterCinema App Store screenshots: a ranked 1v1 duel, rank points and a duel against a friend' },
+      { src: mcIosCollect, alt: 'MasterCinema App Store screenshots: a completed cinema ticket and the profile banner editor' },
+    ],
+  },
   {
     id: 'oneday',
     name: 'OneDay',
@@ -71,10 +101,10 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: 'mastercinema',
-    name: 'MasterCinema',
+    id: 'mc-web',
+    name: 'MasterCinema Web',
     tagline:
-      'Film trivia with five categories, a timed Marathon mode with streaks and lifelines, unlockable themes and leaderboards.',
+      'The browser prototype where MasterCinema began: film trivia with five categories, a timed Marathon mode with streaks and lifelines, unlockable themes and leaderboards.',
     stat: '5 categories · marathon mode · accounts',
     stack: ['Vanilla JS', 'React', 'TypeScript', 'Tailwind', 'Firebase'],
     live: 'https://lucasmarjua-ui.github.io/mastercinema/',
@@ -104,7 +134,7 @@ export const PROJECTS: Project[] = [
 export const INVENTORY = [
   { item: 'OneDay', value: '4 events in history' },
   { item: 'RetroGames', value: '6 games' },
-  { item: 'MasterCinema', value: '5 categories' },
+  { item: 'MasterCinema', value: 'On the App Store' },
   { item: 'PawMatch', value: 'Flutter app' },
   { item: 'Languages', value: 'EN / ES' },
   { item: 'This site', value: 'React + TS' },
@@ -118,13 +148,13 @@ export const SKILLS = [
   },
   {
     name: 'Mobile',
-    description: 'Cross-platform Flutter apps in layers (models, services, providers, screens), so the backend swaps without touching the UI.',
-    stack: ['Flutter', 'Dart', 'Provider'],
+    description: 'Cross-platform Flutter apps in layers (models, services, providers, screens), taken all the way to the App Store: in-app purchases, App Store review and iOS builds automated in the cloud.',
+    stack: ['Flutter', 'Dart', 'Provider', 'App Store', 'Codemagic'],
   },
   {
     name: 'Backend & data',
-    description: 'Auth, cloud saves and live leaderboards on Firebase behind Firestore security rules, plus SQL and Node.js.',
-    stack: ['Firebase', 'Firestore', 'Node.js', 'SQL'],
+    description: 'Auth, cloud saves, live leaderboards and asynchronous duels on Firebase behind Firestore security rules, server-side logic in Cloud Functions and content updated through Remote Config, plus SQL and Node.js.',
+    stack: ['Firebase', 'Firestore', 'Cloud Functions', 'Remote Config', 'Node.js', 'SQL'],
   },
   {
     name: 'Games',
@@ -145,6 +175,12 @@ export const SKILLS = [
 
 // Dates come from each repository's first commit.
 export const LOG = [
+  {
+    date: 'Nov 2026',
+    title: 'MasterCinema is on the App Store',
+    body: 'Approved by Apple and live, in English and Spanish: four game modes, ranked duels, friends, collectible tickets and in-app purchases. Built in Flutter on Windows, with every iOS build made in the cloud by Codemagic.',
+    href: LINKS.appStore,
+  },
   {
     date: 'Oct 2026',
     title: 'OneDay: the Berlin Wall, and a career',
@@ -180,6 +216,12 @@ export const LOG = [
     title: 'Rebuilt this site in pixels',
     body: 'A new portfolio, block by block: pixel type, a live contributions grid, a terminal and a few secrets.',
     href: 'https://github.com/lucasmarjua-ui/lucasmarjua-ui.github.io',
+  },
+  {
+    date: 'Sep 2026',
+    title: 'Started MasterCinema for iPhone',
+    body: 'A from-scratch Flutter rebuild of my web trivia game, designed as a real product: duels, ranks, progression and a vintage cinema look, with content served from Firebase.',
+    href: LINKS.appStore,
   },
   {
     date: 'Sep 2026',

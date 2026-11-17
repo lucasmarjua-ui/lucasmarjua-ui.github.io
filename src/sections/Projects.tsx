@@ -13,9 +13,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const step = (delta: number) => setShot((s) => (s + delta + project.shots.length) % project.shots.length);
 
   return (
-    <article ref={ref} className="h-full">
-      <BuildFrame {...seq.props(0)} className="panel flex h-full flex-col p-3 sm:p-4">
-        <PixelCover {...seq.props(1)} className="aspect-[16/10] overflow-hidden border border-line bg-well">
+    <article ref={ref} className={`h-full ${project.featured ? 'md:col-span-2' : ''}`}>
+      <BuildFrame
+        {...seq.props(0)}
+        className={`panel flex h-full flex-col p-3 sm:p-4 ${project.featured ? 'lg:flex-row lg:items-stretch lg:gap-4' : ''}`}
+      >
+        <PixelCover
+          {...seq.props(1)}
+          className={`aspect-[16/10] overflow-hidden border border-line bg-well ${project.featured ? 'lg:w-[56%] lg:shrink-0 lg:self-start' : ''}`}
+        >
           <img
             src={current.src}
             alt={current.alt}
@@ -36,7 +42,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </PixelCover>
 
-        <div className="flex flex-1 flex-col px-1 pb-2 pt-6 sm:px-2">
+        <div className={`flex flex-1 flex-col px-1 pb-2 pt-6 sm:px-2 ${project.featured ? 'lg:pt-2' : ''}`}>
+          {project.badge && (
+            <p className="mb-3 inline-flex items-center gap-2 self-start border border-leaf/60 px-2 py-1 text-[0.6rem] uppercase tracking-[0.12em] text-leaf">
+              <span className="cursor-blink inline-block h-2 w-2 bg-leaf" aria-hidden="true" />
+              {project.badge}
+            </p>
+          )}
           <h3 className="text-lg uppercase tracking-[0.12em]">
             <TypeText text={project.name} cps={18} {...seq.props(2)} />
           </h3>
@@ -59,12 +71,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <div className="flex flex-wrap gap-6 pt-6 text-xs uppercase tracking-[0.1em]">
               {project.live && (
                 <a href={project.live} target="_blank" rel="noopener noreferrer" className="link-underline inline-flex items-center gap-2">
-                  Play it <Icon name="arrowUpRight" />
+                  {project.liveLabel ?? 'Play it'} <Icon name="arrowUpRight" />
                 </a>
               )}
-              <a href={project.code} target="_blank" rel="noopener noreferrer" className="link-underline inline-flex items-center gap-2">
-                Code <Icon name="arrowUpRight" />
-              </a>
+              {project.code ? (
+                <a href={project.code} target="_blank" rel="noopener noreferrer" className="link-underline inline-flex items-center gap-2">
+                  Code <Icon name="arrowUpRight" />
+                </a>
+              ) : (
+                <span className="text-muted">Private repo</span>
+              )}
             </div>
           </PopIn>
         </div>
@@ -76,7 +92,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export default function Projects() {
   return (
     <section aria-labelledby="projects" className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20">
-      <SectionTitle id="projects" sub="Every one designed, coded, tested and shipped by me. Most are live and playable right now.">
+      <SectionTitle id="projects" sub="Every one designed, coded, tested and shipped by me. One is on the App Store, and the rest are live and playable right now.">
         Projects
       </SectionTitle>
       <div className="grid gap-8 md:grid-cols-2">

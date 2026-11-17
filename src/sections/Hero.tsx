@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { PopIn, TypeText, useBuild, useSequence } from '../build';
 import { Icon } from '../components/Pixel';
 import RoamingDog from '../components/RoamingDog';
-import { CONTACTS } from '../data';
+import { CONTACTS, LINKS } from '../data';
 import { useSecrets } from '../secrets';
 
 const NAME = 'Lucas Martinez';
-const LINES = ['Junior software developer.', 'Web & mobile apps, built end to end.', 'Based in Manchester, UK.'];
+const LINES = ['Junior software developer.', 'Web & mobile apps, built end to end.', 'One of them is on the App Store.', 'Based in Manchester, UK.'];
 const STEPS = 2 + LINES.length + 1; // name, lines, button, links
 const BLOCKS = 20;
 // Roughly how long the typing takes, used to run the percentage counter smoothly.
@@ -104,9 +104,14 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-wrap items-center gap-6">
           <PopIn {...seq.props(1 + LINES.length)}>
-            <a href="#projects" className="btn btn-primary">
-              See projects <Icon name="arrowDown" />
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a href="#projects" className="btn btn-primary">
+                See projects <Icon name="arrowDown" />
+              </a>
+              <a href={LINKS.appStore} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+                MasterCinema on the App Store <Icon name="arrowUpRight" />
+              </a>
+            </div>
           </PopIn>
           <PopIn {...seq.props(2 + LINES.length)}>
             <ul className="flex flex-wrap gap-6 text-[0.7rem] uppercase tracking-[0.12em] text-muted">

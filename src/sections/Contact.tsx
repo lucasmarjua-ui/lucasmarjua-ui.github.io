@@ -50,7 +50,7 @@ function run(raw: string, unlock: (id: SecretId) => void): Line[] | 'clear' {
     case 'open': {
       const project = PROJECTS.find((p) => p.id === arg || p.name.toLowerCase() === arg);
       if (!project) return [{ kind: 'err', text: `open: try one of ${PROJECTS.map((p) => p.id).join(', ')}` }];
-      window.open(project.live ?? project.code, '_blank', 'noopener');
+      window.open(project.live ?? project.code ?? LINKS.github, '_blank', 'noopener');
       return [{ kind: 'ok', text: `opening ${project.name}…` }];
     }
     case 'skills':
