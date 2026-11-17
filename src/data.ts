@@ -7,9 +7,6 @@ import pawmatchChat from './assets/screenshots/pawmatch-chat.webp';
 import retrogamesPortal from './assets/screenshots/retrogames-portal.webp';
 import retrogamesPersonaje from './assets/screenshots/retrogames-personaje.webp';
 import retrogamesTienda from './assets/screenshots/retrogames-tienda.webp';
-import mastercinemaVestibulo from './assets/screenshots/mastercinema-vestibulo.webp';
-import mastercinemaMaraton from './assets/screenshots/mastercinema-maraton.webp';
-import mastercinemaResumen from './assets/screenshots/mastercinema-resumen.webp';
 import mcIosKeyArt from './assets/screenshots/mastercinema-ios-key-art.webp';
 import mcIosModes from './assets/screenshots/mastercinema-ios-modes.webp';
 import mcIosDuels from './assets/screenshots/mastercinema-ios-duels.webp';
@@ -101,23 +98,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: 'mc-web',
-    name: 'MasterCinema Web',
-    tagline:
-      'The browser prototype where MasterCinema began: film trivia with five categories, a timed Marathon mode with streaks and lifelines, unlockable themes and leaderboards.',
-    stat: '5 categories · marathon mode · accounts',
-    stack: ['Vanilla JS', 'React', 'TypeScript', 'Tailwind', 'Firebase'],
-    live: 'https://lucasmarjua-ui.github.io/mastercinema/',
-    code: 'https://github.com/lucasmarjua-ui/mastercinema',
-    shots: [
-      { src: mastercinemaVestibulo, alt: 'MasterCinema landing screen with category selection', position: 'top' },
-      { src: mastercinemaMaraton, alt: 'MasterCinema trivia question in Marathon mode' },
-      { src: mastercinemaResumen, alt: 'MasterCinema marathon results screen with score' },
-    ],
-  },
-  {
     id: 'pawmatch',
     name: 'PawMatch',
+    featured: true,
     tagline:
       'A Flutter app that matches dogs and their owners for playdates, walks and breeding, on swappable repositories ready for Firebase.',
     stat: 'Cross-platform · layered architecture',
@@ -220,7 +203,7 @@ export const LOG = [
   {
     date: 'Sep 2026',
     title: 'Started MasterCinema for iPhone',
-    body: 'A from-scratch Flutter rebuild of my web trivia game, designed as a real product: duels, ranks, progression and a vintage cinema look, with content served from Firebase.',
+    body: 'A movie-trivia game for iPhone, built from scratch in Flutter as a real product: duels, ranks, progression and a vintage cinema look, with content served from Firebase.',
     href: LINKS.appStore,
   },
   {
@@ -234,12 +217,6 @@ export const LOG = [
     title: 'Opened the RetroGames arcade',
     body: 'Six Canvas classics behind one portal, with Firebase accounts, cloud saves and a global ranking.',
     href: 'https://lucasmarjua-ui.github.io/retrogames/',
-  },
-  {
-    date: 'Sep 2026',
-    title: 'Rolled the MasterCinema credits',
-    body: 'Film trivia with a timed Marathon mode, lifelines, unlockable themes and per-category leaderboards.',
-    href: 'https://lucasmarjua-ui.github.io/mastercinema/',
   },
   {
     date: 'Aug 2026',
